@@ -5,3 +5,7 @@ Currently:
 
 Lecture Code:
   Week 01
+  Week 02
+
+Lab Code:
+  Lab 01
