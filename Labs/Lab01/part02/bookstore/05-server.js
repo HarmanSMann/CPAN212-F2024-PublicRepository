@@ -49,7 +49,7 @@ What do you notice when you read these 2 function calls:
 */
 
 const readpage = (filename) => {
-  fs.readFile(path.join(__dirname, "pages", "home.html"), (err, data) => {
+  fs.readFile(path.join(__dirname, "pages", filename), (err, data) => {
     if (err) {
       console.error("Error reading file:", err);
     } else {
