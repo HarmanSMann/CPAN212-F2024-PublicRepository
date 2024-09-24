@@ -1,12 +1,12 @@
 // adding multer
 const multer = require("multer");
-const upload_directory = require("../app")
+const path = require("path")
 
 const storage = multer.diskStorage({
   // the function that saves the file
   destination: function (req, file, cb) {
     // where we are storing the file
-    cb(null, upload_directory);
+    cb(null, path.join(__dirname, "../uploads"));
   },
   filename: function (req, file, cb) {
     // what is the filename going to be
