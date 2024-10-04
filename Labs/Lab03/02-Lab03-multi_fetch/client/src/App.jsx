@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./app.css";
 
 function App() {
   const [singleFile, setSingleFile] = useState(null);
@@ -116,58 +117,63 @@ function App() {
   // };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>File Upload and Fetch App</h1>
+    <div className="container">
+      <div style={{ padding: "20px" }}>
+        <h1>File Upload and Fetch App</h1>
 
-      {/* Section for uploading single file */}
-      <div>
-        <h2>Upload Single File</h2>
-        <input type="file" onChange={handleSingleFileChange} />
-        <button onClick={uploadSingleFile}>Upload Single File</button>
-      </div>
+        {/* Section for uploading single file */}
+        <div className="file-upload-container">
+          <h2>Upload Single File</h2>
+          <input type="file" onChange={handleSingleFileChange} />
+          <button onClick={uploadSingleFile}>Upload Single File</button>
+        </div>
 
-      {/* Section for uploading multiple files */}
-      <div>
-        <h2>Upload Multiple Files</h2>
-        <input type="file" multiple onChange={handleMultipleFilesChange} />
-        <button onClick={uploadMultipleFiles}>Upload Multiple Files</button>
-      </div>
+        {/* Section for uploading multiple files */}
+        <div className="file-upload-container">
+          <h2>Upload Multiple Files</h2>
+          <input type="file" multiple onChange={handleMultipleFilesChange} />
+          <button onClick={uploadMultipleFiles}>Upload Multiple Files</button>
+        </div>
 
-      {/* Section for fetching and displaying a single file */}
-      <div>
-        <h2>Fetch Single File</h2>
-        <button onClick={fetchSingleFile}>Fetch Single File</button>
-        {fetchedSingleFiles && (
-          <div>
-            <h3>Single File</h3>
-            <img
-              src={fetchedSingleFiles}
-              alt="Fetched Single"
-              style={{ width: "200px", marginTop: "10px" }}
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Section for fetching and displaying multiple files */}
-      <div>
-        <h2>Fetch Multiple Files</h2>
-        <button onClick={fetchMultipleFiles}>Fetch Multiple File</button>
-        {fetchedFiles && (
-          <div>
-            <h3>Multiple Files</h3>
-            {fetchedFiles.map((file, index) => (
-              <div key={index}>
-                <p>{file.filename}</p>
+        {/* Section for fetching and displaying a single file */}
+        <div>
+          <h2>Fetch Single File</h2>
+          <br></br>
+          <div className="fetch-container">
+            <button onClick={fetchSingleFile}>Fetch Single File</button>
+            {fetchedSingleFiles && (
+              <div>
+                <h3>Single File</h3>
                 <img
-                  src={file.url}
-                  alt={file.filename}
-                  style={{ width: "200px", marginTop: "10px" }}
+                  src={fetchedSingleFiles}
+                  alt="Fetched Single"
                 />
               </div>
-            ))}
+            )}
           </div>
-        )}
+        </div>
+
+        {/* Section for fetching and displaying multiple files */}
+        <div>
+          <h2>Fetch Multiple Files</h2>
+          <div className="fetch-container">
+            <button onClick={fetchMultipleFiles}>Fetch Multiple File</button>
+            {fetchedFiles && (
+              <div className="fetch-multiple-files">
+                <h3>Multiple Files</h3>
+                {fetchedFiles.map((file, index) => (
+                  <div key={index}>
+                    <p>{file.filename}</p>
+                    <img
+                      src={file.url}
+                      alt={file.filename}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,42 +1,70 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  min-height: 100vh; /* Full height of the viewport */
+  padding: 40px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Styling for the fetch section */
+.fetch-container {
+  display: flex;
+  flex-direction: column; /* Stack button and image vertically */
+  align-items: center; /* Center them horizontally */
+  margin-top: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.fetch-container img {
+  margin-top: 15px; /* Space between button and image */
+  width: 100%; 
+  max-width: 200px; /* Control the size of the image */
+  border-radius: 8px; /* Optional: Add some border radius */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Style for each file fetched (centering the text and image) */
+.fetch-multiple-files div {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Space between each fetched file */
 }
 
-.card {
-  padding: 2em;
+.fetch-multiple-files img {
+  margin-top: 10px; /* Space between filename and image */
+  width: 100%;
+  max-width: 200px; /* Control the size of the image */
+  border-radius: 8px; /* Optional: Add some border radius */
 }
 
-.read-the-docs {
-  color: #888;
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center them horizontally */
+  margin-bottom: 20px;
+}
+
+.file-upload-container input {
+  margin-bottom: 20px; /* Add padding/space below the input */
+}
+
+h1,
+h2,
+h3 {
+  text-align: center; /* Centers the headers */
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+input {
+  background-color: #626262;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Button hover effect with smooth transition */
+button:hover {
+  background-color: #0056b3;
+  transition: background-color 1s ease;
 }
