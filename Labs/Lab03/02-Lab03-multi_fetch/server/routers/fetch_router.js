@@ -48,24 +48,15 @@ router.get("/multiple", (req, res) => {
 
 // Version 2
 router.get("/multiple-path", (req, res) => {
-  // we read the directory items synchronously to not trip the async speed
   let files_array = fs.readdirSync(upload_directory);
-  // error checking
   if (files_array.length == 0) {
-    // adding return will stop the rest of the operations
     return res.status(503).send({
       message: "No images",
     });
   }
   let filenames = _.sampleSize(files_array, 3);
-  let file_paths = filenames.map((filename) =>
-    path.join(upload_directory, filename)
-  );
-  console.log(file_paths)
-
-  // Send the array of file paths
   res.json({
-    files: file_paths,
+    files: filenames,
   });
 });
 
