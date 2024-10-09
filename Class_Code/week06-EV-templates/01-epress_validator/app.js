@@ -24,6 +24,7 @@ app.post("/register", registerValidator, validate, (req, res) => {
   res.send(req.body);
 });
 
+// new test here
 
 app.post("/inclass", (req, res)=>{
   res.send(req.body.first_name)
