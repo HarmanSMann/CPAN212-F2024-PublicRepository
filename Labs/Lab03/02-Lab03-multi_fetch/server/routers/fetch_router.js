@@ -61,6 +61,13 @@ router.get("/multiple-path", (req, res) => {
 });
 
 router.get("/file", (req, res)=>{
+  fs.readFile(path.join(__dirname, "../uploads", req.body.filename), "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading the file:", err);
+      return;
+    }
+    console.log("File Content:", data);
+  });
   res.sendFile(path.join(__dirname, "../uploads", req.body.filename))
 })
 

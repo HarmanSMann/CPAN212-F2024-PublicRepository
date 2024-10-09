@@ -25,15 +25,11 @@ app.post(
     body("first_name").notEmpty().withMessage("First Name is required"),
     body("username").notEmpty().withMessage("Username is required"),
     body("email")
-      .notEmpty()
-      .withMessage("Email is required")
-      .isEmail()
-      .withMessage("Please Enter a valid Email Adress"),
+      .notEmpty().withMessage("Email is required")
+      .isEmail().withMessage("Please Enter a valid Email Adress"),
     body("password")
-      .notEmpty()
-      .withMessage("password is required")
-      .isLength({ min: 5 })
-      .withMessage("Password should be atleast 5 characters"),
+      .notEmpty().withMessage("password is required")
+      .isLength({ min: 5 }).withMessage("Password should be atleast 5 characters"),
   ],
   (req, res) => {
     const errors = validationResult(req);

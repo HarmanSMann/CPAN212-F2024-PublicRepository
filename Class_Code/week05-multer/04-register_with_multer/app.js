@@ -23,6 +23,7 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
+  console.log(req)
   res.send("Welcome to our server");
 });
 

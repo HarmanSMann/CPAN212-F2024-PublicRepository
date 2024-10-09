@@ -58,6 +58,7 @@ function App() {
     try {
       const response = await fetch("http://localhost:8000/fetch/single");
       const blob = await response.blob();
+      console.log(blob)
       const url = URL.createObjectURL(blob);
       setFetchedSingleFiles(url);
     } catch (error) {
@@ -89,8 +90,27 @@ function App() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      console.log(response);
       const data = await response.json();
+
+      const imageUrl = await fetch(data.message);
+      console.log(imageUrl);
+
       setDogImageUrl(data.message); // Update state with the image URL
+
+      // fetch dog image URL
+      const response2 = await fetch(data.message)
+      const dogImagefile = await response2.blob();
+
+      try {
+        fetch("http://localhost:8000/save/single") {
+          // do the form data stuff
+          // save dogImagefile into form data
+          //send data
+        }
+      }
+
+
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -144,10 +164,7 @@ function App() {
             {fetchedSingleFiles && (
               <div>
                 <h3>Single File</h3>
-                <img
-                  src={fetchedSingleFiles}
-                  alt="Fetched Single"
-                />
+                <img src={fetchedSingleFiles} alt="Fetched Single" />
               </div>
             )}
           </div>
@@ -164,16 +181,14 @@ function App() {
                 {fetchedFiles.map((file, index) => (
                   <div key={index}>
                     <p>{file.filename}</p>
-                    <img
-                      src={file.url}
-                      alt={file.filename}
-                    />
+                    <img src={file.url} alt={file.filename} />
                   </div>
                 ))}
               </div>
             )}
           </div>
         </div>
+        <button onClick={fetchRandomDogImage}>Fetch Dog File</button>
       </div>
     </div>
   );
