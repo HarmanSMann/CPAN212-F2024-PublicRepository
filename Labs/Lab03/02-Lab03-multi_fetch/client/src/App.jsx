@@ -195,3 +195,6 @@ function App() {
 }
 
 export default App;
+
+
+// https://api/openai/{harman}/{password}/hu82gd7gjdhsgi7d2g
