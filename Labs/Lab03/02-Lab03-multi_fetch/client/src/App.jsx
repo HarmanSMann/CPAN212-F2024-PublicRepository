@@ -58,6 +58,7 @@ function App() {
     try {
       const response = await fetch("http://localhost:8000/fetch/single");
       const blob = await response.blob();
+
       const url = URL.createObjectURL(blob);
       setFetchedSingleFiles(url);
     } catch (error) {
@@ -90,7 +91,7 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setDogImageUrl(data.message); // Update state with the image URL
+      console.log(data.message)
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -175,6 +176,8 @@ function App() {
           </div>
         </div>
       </div>
+      <button onClick={fetchRandomDogImage}>Fetch Dog File</button>
+
     </div>
   );
 }

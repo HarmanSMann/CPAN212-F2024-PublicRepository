@@ -1,0 +1,1 @@
+I have replaced the app.js/server.js file with index.js to foreshadow the addition of Vercel into our projects
