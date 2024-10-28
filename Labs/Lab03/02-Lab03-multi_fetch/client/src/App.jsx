@@ -59,6 +59,7 @@ function App() {
       const response = await fetch("http://localhost:8000/fetch/single");
       const blob = await response.blob();
 
+      console.log(blob)
       const url = URL.createObjectURL(blob);
       setFetchedSingleFiles(url);
     } catch (error) {
@@ -90,8 +91,9 @@ function App() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      console.log(response);
       const data = await response.json();
-      console.log(data.message)
+      setDogImageUrl(data.message); // Update state with the image URL
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -145,10 +147,7 @@ function App() {
             {fetchedSingleFiles && (
               <div>
                 <h3>Single File</h3>
-                <img
-                  src={fetchedSingleFiles}
-                  alt="Fetched Single"
-                />
+                <img src={fetchedSingleFiles} alt="Fetched Single" />
               </div>
             )}
           </div>
@@ -165,16 +164,14 @@ function App() {
                 {fetchedFiles.map((file, index) => (
                   <div key={index}>
                     <p>{file.filename}</p>
-                    <img
-                      src={file.url}
-                      alt={file.filename}
-                    />
+                    <img src={file.url} alt={file.filename} />
                   </div>
                 ))}
               </div>
             )}
           </div>
         </div>
+        <button onClick={fetchRandomDogImage}>Fetch Dog File</button>
       </div>
       <button onClick={fetchRandomDogImage}>Fetch Dog File</button>
 
@@ -183,3 +180,6 @@ function App() {
 }
 
 export default App;
+
+
+// https://api/openai/{harman}/{password}/hu82gd7gjdhsgi7d2g

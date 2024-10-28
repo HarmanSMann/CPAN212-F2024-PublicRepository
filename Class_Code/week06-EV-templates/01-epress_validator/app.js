@@ -24,6 +24,12 @@ app.post("/register", registerValidator, validate, (req, res) => {
   res.send(req.body);
 });
 
+// new test here
+
+app.post("/inclass", (req, res)=>{
+  res.send(req.body.first_name)
+})
+
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
