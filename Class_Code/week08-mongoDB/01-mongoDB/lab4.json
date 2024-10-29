@@ -1,0 +1,182 @@
+[
+  {
+    "brand": "Apple",
+    "model": "MacBook Air",
+    "processor": "Apple M1",
+    "ram": "8GB",
+    "storage": "256GB SSD",
+    "price": 999.99,
+    "stock": 15
+  },
+  {
+    "brand": "HP",
+    "model": "Spectre x360",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "1TB SSD",
+    "price": 1399.99,
+    "stock": 8
+  },
+  {
+    "brand": "Lenovo",
+    "model": "ThinkPad X1 Carbon",
+    "processor": "Intel Core i5",
+    "ram": "8GB",
+    "storage": "256GB SSD",
+    "price": 1199.99,
+    "stock": 12
+  },
+  {
+    "brand": "Acer",
+    "model": "Aspire 5",
+    "processor": "AMD Ryzen 5",
+    "ram": "8GB",
+    "storage": "512GB SSD",
+    "price": 549.99,
+    "stock": 20
+  },
+  {
+    "brand": "Asus",
+    "model": "ZenBook 14",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1299.99,
+    "stock": 7
+  },
+  {
+    "brand": "Microsoft",
+    "model": "Surface Laptop 4",
+    "processor": "AMD Ryzen 7",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1499.99,
+    "stock": 5
+  },
+  {
+    "brand": "Samsung",
+    "model": "Galaxy Book Pro",
+    "processor": "Intel Core i5",
+    "ram": "8GB",
+    "storage": "256GB SSD",
+    "price": 1099.99,
+    "stock": 10
+  },
+  {
+    "brand": "Razer",
+    "model": "Blade 15",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "1TB SSD",
+    "price": 1799.99,
+    "stock": 6
+  },
+  {
+    "brand": "MSI",
+    "model": "GF65 Thin",
+    "processor": "Intel Core i5",
+    "ram": "8GB",
+    "storage": "512GB SSD",
+    "price": 999.99,
+    "stock": 9
+  },
+  {
+    "brand": "LG",
+    "model": "Gram 17",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "1TB SSD",
+    "price": 1699.99,
+    "stock": 4
+  },
+  {
+    "brand": "Dell",
+    "model": "Inspiron 15",
+    "processor": "Intel Core i5",
+    "ram": "8GB",
+    "storage": "256GB SSD",
+    "price": 649.99,
+    "stock": 18
+  },
+  {
+    "brand": "HP",
+    "model": "Pavilion 14",
+    "processor": "AMD Ryzen 5",
+    "ram": "8GB",
+    "storage": "512GB SSD",
+    "price": 699.99,
+    "stock": 12
+  },
+  {
+    "brand": "Apple",
+    "model": "MacBook Pro",
+    "processor": "Apple M2",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1799.99,
+    "stock": 10
+  },
+  {
+    "brand": "Acer",
+    "model": "Nitro 5",
+    "processor": "AMD Ryzen 7",
+    "ram": "16GB",
+    "storage": "1TB SSD",
+    "price": 1299.99,
+    "stock": 5
+  },
+  {
+    "brand": "Lenovo",
+    "model": "Legion 5",
+    "processor": "AMD Ryzen 5",
+    "ram": "8GB",
+    "storage": "512GB SSD",
+    "price": 999.99,
+    "stock": 14
+  },
+  {
+    "brand": "Asus",
+    "model": "ROG Zephyrus G14",
+    "processor": "AMD Ryzen 9",
+    "ram": "16GB",
+    "storage": "1TB SSD",
+    "price": 1999.99,
+    "stock": 3
+  },
+  {
+    "brand": "Razer",
+    "model": "Blade Stealth 13",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1499.99,
+    "stock": 4
+  },
+  {
+    "brand": "Microsoft",
+    "model": "Surface Pro 7",
+    "processor": "Intel Core i5",
+    "ram": "8GB",
+    "storage": "256GB SSD",
+    "price": 899.99,
+    "stock": 11
+  },
+  {
+    "brand": "Samsung",
+    "model": "Galaxy Book Flex",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1399.99,
+    "stock": 6
+  },
+  {
+    "brand": "Dell",
+    "model": "G5 15",
+    "processor": "Intel Core i7",
+    "ram": "16GB",
+    "storage": "512GB SSD",
+    "price": 1199.99,
+    "stock": 7
+  }
+]
