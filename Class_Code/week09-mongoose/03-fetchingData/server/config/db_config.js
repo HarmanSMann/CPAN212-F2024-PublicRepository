@@ -3,7 +3,7 @@ const mongoose = require("mongoose"); // importing the dependancy
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      "YOUR STRING HERE + DB Name"
+      "mongodb+srv://harman:harman@cluster0.zgitjwq.mongodb.net/Bookstore"
     );
     console.log(`MongoDB Connected`);
   } catch (error) {

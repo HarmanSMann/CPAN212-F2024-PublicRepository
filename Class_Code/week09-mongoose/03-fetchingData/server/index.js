@@ -139,6 +139,32 @@ app.post("/searchpromise", async (req, res) => {
 });
 //---------------------------------------------------------------------------------------------
 
+app.post("/searchwithfilters", async (req, res) => {
+  // check each possible search filter
+  let filter = {};
+  if (req.query.title) {
+    filter.title = req.query.title;
+  }
+  if (req.query.author) {
+    filter.author = req.query.author;
+  }
+  if (req.query.genre) {
+    filter.genre = req.query.genre;
+  }
+  if (req.query.year) {
+    filter.year = req.query.year;
+  }
+  console.log(filter)
+  Book.find(filter)
+    .then((books) => {
+      res.json(books);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
 // better version -> regex search to help with indentation
 // app.post("/fetch_search", async (req, res) => {
 //   try {

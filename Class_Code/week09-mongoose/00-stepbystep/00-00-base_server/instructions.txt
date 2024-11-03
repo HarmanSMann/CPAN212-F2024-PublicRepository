@@ -1,0 +1,3 @@
+1 - install modules: express, nodemon, mongoose, dotenv
+2 - replace the content in your dotenv file with real content
+3 - run index.js, this is now your server file.
