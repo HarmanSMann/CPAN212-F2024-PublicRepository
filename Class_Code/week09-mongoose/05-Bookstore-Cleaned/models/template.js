@@ -4,6 +4,9 @@ fieldName1: {
     required: true, // Indicates this field is mandatory
     trim: true // Removes whitespace from both ends
   },
+
+
+  
   fieldName2: {
     type: Number, // Example: 42 (could be an age, count, etc.)
     required: false // Optional field
