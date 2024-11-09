@@ -1,0 +1,9 @@
+Heres the thing about a JWT
+It isnt something we store on the server or a DB, it is something the server will generate and send to the client side app
+It will be something that we need to handle on both the client side and server side
+
+Steps of creation:
+Generate a Token:
+    1 - When they login, generate a Token
+    2 - send the token to the front end
+    3 - client: app saves the token in local storage

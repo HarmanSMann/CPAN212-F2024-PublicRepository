@@ -9,6 +9,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key"; // Secret key for JWT
+
 
 router.post("/register", (req, res) => {
   const { email, password, firstName, lastName } = req.body;
@@ -53,7 +57,17 @@ router.post("/login", (req, res) => {
             return res.status(400).json({ error: "Invalid credentials" });
           }
 
-          return res.status(200).json({ message: "Login Successful" });
+          // Generate JWT token
+          const token = jwt.sign(
+            { userId: user_account._id, email: user_account.email },
+            JWT_SECRET,
+            { expiresIn: "1h" } // The token expires in 1 hour
+          );
+
+          return res.status(200).json({
+            message: "Login Successful",
+            token: token, // Send the JWT token in the response
+          });
         })
         .catch((error) => {
           console.error("Error during password comparison: ", error);
