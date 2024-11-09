@@ -1,0 +1,13 @@
+We are going to break this down into 2 mini lessons
+The idea here is to showcase the 2 ways of handling user persistance
+
+Based on my history of using them:
+
+Sessions are fine, if you are looking to make a SSR application, this may be prefered
+    Sessions store a piece of data, like a log, indicating all the visitors of the website and keep a notice of when they come in.
+    We have to consider storing our information somewhere, and the server has its limits, so we will move it onto our database using mongoDB
+
+    We will use express-session and connect-mongo for class purposes. Please check the npm store for more information
+
+
+JWT (JSON Web Token), its a small ID card that you hand over to the user for them to access websites.
