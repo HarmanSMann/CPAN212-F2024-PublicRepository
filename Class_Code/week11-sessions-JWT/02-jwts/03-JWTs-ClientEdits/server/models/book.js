@@ -24,8 +24,13 @@ const bookSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  created_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 
 // Create the model
-const Book = mongoose.model("books", bookSchema);
+const Book = mongoose.model("Book", bookSchema);
 module.exports = Book;
