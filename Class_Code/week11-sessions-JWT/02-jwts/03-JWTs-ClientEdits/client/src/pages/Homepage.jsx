@@ -8,9 +8,21 @@ function Homepage({ onViewDetails }) {
   useEffect(() => {
     async function fetchBooks() {
       try {
-        const response = await fetch("http://localhost:8001/book/fetch-all");
+        // Retrieve the token from local storage
+        const token = localStorage.getItem("token");
+
+        const response = await fetch("http://localhost:8001/book/fetch-all", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, // Attach the JWT token
+          },
+        });
+
         const data = await response.json();
-        setBooks(data);
+
+        // Ensure data is an array before setting it to state
+        setBooks(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -23,10 +35,7 @@ function Homepage({ onViewDetails }) {
       <h2>All Books</h2>
       <div className="book-grid">
         {books.map((book) => (
-          <div
-            key={book._id}
-            className="book-card"
-          >
+          <div key={book._id} className="book-card">
             <Link to={`/book/details/${book._id}`} onClick={() => onViewDetails(book)}>
               <h3>{book.title}</h3>
               <p>Author: {book.author}</p>

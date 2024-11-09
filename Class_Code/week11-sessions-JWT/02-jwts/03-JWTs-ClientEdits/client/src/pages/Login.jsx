@@ -24,13 +24,14 @@ function Login() {
       const result = await response.json();
 
       if (response.ok) {
-        // If login is successful, navigate to the homepage
+        // If login is successful, store the JWT token
         console.log(result);
-        navigate("/");
+        localStorage.setItem("token", result.token); // Store token in local storage
+        navigate("/"); // Navigate to the homepage
       } else {
         // Handle login errors
         console.error("Login failed:", result);
-        alert(result.error)
+        alert(result.error);
       }
     } catch (error) {
       console.error("Error logging in:", error);
