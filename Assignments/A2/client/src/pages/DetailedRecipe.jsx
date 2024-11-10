@@ -14,7 +14,7 @@ function RecipeDetail() {
 
   function handleDelete(id) {
     fetch(`http://localhost:8001/recipe/${id}`, { method: 'DELETE' })
-      .then(() => (window.location.href = "/recipes"))
+      .then(() => (window.location.href = "/"))
       .catch(error => console.error(error));
   }
 

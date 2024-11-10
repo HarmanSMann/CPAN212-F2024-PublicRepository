@@ -50,7 +50,7 @@ function AddRecipe() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(recipe),
     })
-      .then(() => navigate('/recipes'))
+      .then(() => navigate('/'))
       .catch((error) => console.error(error));
   }
 

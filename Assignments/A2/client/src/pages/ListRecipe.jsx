@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./ListRecipe.css";
 
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
@@ -7,7 +8,10 @@ function RecipeList() {
   useEffect(() => {
     fetch("http://localhost:8001/recipe")
       .then((response) => response.json())
-      .then((data) => setRecipes(data))
+      .then((data) => {
+        console.log(data)
+        setRecipes(data);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -21,15 +25,19 @@ function RecipeList() {
     <div>
       <h1>All Recipes</h1>
       <Link to="/recipes/new">Add New Recipe</Link>
-      <ul>
+      <div className="recipe-list">
         {recipes.map((recipe) => (
-          <li key={recipe._id}>
-            <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
-            <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link>
-            <button onClick={() => handleDelete(recipe._id)}>Delete</button>
-          </li>
+          <div key={recipe.id} className="recipe-card">
+            <h2>{recipe.name}</h2>
+            <p>{recipe.description}</p>
+            <div className="recipe-actions">
+              <Link to={`/recipes/${recipe._id}`}>View</Link>
+              <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link>
+              <button onClick={() => handleDelete(recipe._id)}>Delete</button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
