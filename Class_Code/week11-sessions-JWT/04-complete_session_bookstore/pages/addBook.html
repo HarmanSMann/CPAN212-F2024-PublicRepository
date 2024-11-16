@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Book</title>
+    <style>
+      /* Ensure body and html fill the entire viewport */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: "Georgia", serif;
+        background-color: #f4f1ea;
+        color: #333;
+      }
+
+      /* Use flexbox on the body to manage layout */
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      /* The main content will be centered */
+      main {
+        padding: 30px;
+        max-width: 600px;
+        margin: 20px auto; /* Keep the form centered */
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+        overflow: auto; /* Avoid stretching the content if it's too long */
+        height: auto; /* Prevent the main content from stretching */
+      }
+
+      header {
+        background-color: #c49d68;
+        color: #f4f1ea;
+        padding: 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      header nav {
+        margin-top: 10px;
+      }
+
+      header nav a {
+        color: #f4f1ea;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
+
+      header nav a:hover {
+        text-decoration: underline;
+      }
+
+      h2 {
+        color: #6b4a30;
+        font-size: 2rem;
+        border-bottom: 2px solid #6b4a30;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-size: 1.1rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #c49d68;
+        color: #f4f1ea;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #6b4a30;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #c49d68;
+        color: #f4f1ea;
+        margin-top: auto; /* Push footer to the bottom */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Add a New Book</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/books/all">View All Books</a>
+        <a href="/books/add">Add a New Book</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Enter Book Details</h2>
+      <form id="addBookForm">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" required />
+
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" required />
+
+        <label for="publishers">Publishers</label>
+        <input type="text" id="publishers" name="publishers" required />
+
+        <label for="genres">Genres</label>
+        <input type="text" id="genres" name="genres" required />
+
+        <label for="price">Price ($)</label>
+        <input type="number" id="price" name="price" step="0.01" required />
+
+        <label for="pages">Pages</label>
+        <input type="number" id="pages" name="pages" required />
+
+        <button type="submit">Add Book</button>
+      </form>
+    </main>
+
+    <footer>&copy; 2024 Bookstore. Crafted with care for book lovers.</footer>
+
+    <script>
+      document
+        .getElementById("addBookForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(e.target);
+          const bookData = {
+            title: formData.get("title"),
+            author: formData.get("author"),
+            publishers: formData.get("publishers"),
+            genres: formData.get("genres"),
+            price: parseFloat(formData.get("price")),
+            pages: parseInt(formData.get("pages")),
+          };
+
+          try {
+            const response = await fetch("/api/books/add", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(bookData),
+            });
+
+            if (response.ok) {
+              alert("Book added successfully!");
+              window.location.href = "/";
+            } else {
+              throw new Error("Failed to add book");
+            }
+          } catch (error) {
+            alert("Error adding book: " + error.message);
+          }
+        });
+    </script>
+  </body>
+</html>

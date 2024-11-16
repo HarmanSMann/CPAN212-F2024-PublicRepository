@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Georgia", serif;
+        background-color: #f4f1ea;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        background-color: #c49d68;
+        color: #f4f1ea;
+        padding: 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      header nav {
+        margin-top: 10px;
+      }
+
+      header nav a {
+        color: #f4f1ea;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
+
+      header nav a:hover {
+        text-decoration: underline;
+      }
+
+      main {
+        padding: 30px;
+        max-width: 600px;
+        margin: 0 auto;
+        flex-grow: 1;
+      }
+
+      h2 {
+        color: #6b4a30;
+        font-size: 2rem;
+        border-bottom: 2px solid #6b4a30;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+      }
+
+      input[type="submit"] {
+        padding: 10px;
+        font-size: 1.2rem;
+        background-color: #c49d68;
+        color: #f4f1ea;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #6b4a30;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #c49d68;
+        color: #f4f1ea;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Login</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/books/add">Add a New Book</a>
+        <a href="/register">Register</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Login to Your Account</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="submit" value="Login" />
+      </form>
+    </main>
+
+    <footer>&copy; 2024 Bookstore. Crafted with care for book lovers.</footer>
+
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch("/api/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const result = await response.json();
+          if (response.ok) {
+            alert("Login successful!");
+            window.location.href = "/"; // Redirect to homepage or dashboard
+          } else {
+            alert(result.message || "Login failed.");
+          }
+        } catch (error) {
+          console.error("Error logging in:", error);
+          alert("Error logging in. Please try again.");
+        }
+      });
+    </script>
+  </body>
+</html>

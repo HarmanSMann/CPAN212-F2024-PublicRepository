@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookstore Homepage</title>
+  <style>
+    /* Reset margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic layout settings */
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f4f1ea;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #c49d68;
+      color: #f4f1ea;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    header nav {
+      margin-top: 10px;
+    }
+
+    header nav a {
+      color: #f4f1ea;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-grow: 1; /* Allow main content to take available space */
+    }
+
+    h2 {
+      color: #6b4a30;
+      font-size: 2rem;
+      border-bottom: 2px solid #6b4a30;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .book-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .book-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .book-card h3 {
+      font-size: 1.5rem;
+      color: #6b4a30;
+      margin: 10px 0;
+    }
+
+    .book-card p {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    .book-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .book-card a:hover {
+      background-color: #6b4a30;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+    }
+
+    /* Button styling */
+    .session-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #c49d68;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .session-button:hover {
+      background-color: #6b4a30;
+    }
+
+    .session-info {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #6b4a30;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Our Bookstore</h1>
+    <nav>
+      <a href="/books/all">View All Books</a>
+      <a href="/books/add">Add a New Book</a>
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Featured Books</h2>
+    <div id="featuredBooks" class="book-list"></div>
+
+    <!-- Button to showcase session info -->
+    <button id="sessionButton" class="session-button">Show Session Info</button>
+    <div id="sessionInfo" class="session-info"></div>
+  </main>
+
+  <footer>
+    &copy; 2024 Bookstore. Crafted with care for book lovers.
+  </footer>
+
+  <script>
+    async function loadFeaturedBooks() {
+      try {
+        const response = await fetch('/api/books');
+        const books = await response.json();
+
+        const featuredBooksContainer = document.getElementById('featuredBooks');
+        featuredBooksContainer.innerHTML = ''; // Clear previous content
+
+        if (books.length === 0) {
+          featuredBooksContainer.innerHTML = '<p>No books available at the moment.</p>';
+          return;
+        }
+
+        books.slice(0, 5).forEach(book => { // Display only the first 5 books
+          const bookCard = document.createElement('div');
+          bookCard.className = 'book-card';
+          bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Price:</strong> $${book.price.toFixed(2)}</p>
+            <a href="/books/${book._id}">View Details</a>
+          `;
+          featuredBooksContainer.appendChild(bookCard);
+        });
+      } catch (error) {
+        console.error('Error loading featured books:', error);
+        document.getElementById('featuredBooks').innerHTML = '<p>Error loading books. Please try again later.</p>';
+      }
+    }
+
+    // Event listener to show session data
+    document.getElementById('sessionButton').addEventListener('click', async () => {
+      try {
+        const response = await fetch('/api/users/session', { method: 'GET' });
+        const data = await response.json();
+        console.log(data)
+        const sessionInfoDiv = document.getElementById('sessionInfo');
+        if (response.ok && data.userId) {
+          sessionInfoDiv.innerHTML = `Logged in as: ${data.first_name} (ID: ${data.userId})`;
+        } else {
+          sessionInfoDiv.innerHTML = 'No user session found.';
+        }
+      } catch (error) {
+        console.error('Error fetching session:', error);
+        document.getElementById('sessionInfo').innerHTML = 'Error retrieving session data.';
+      }
+    });
+
+    loadFeaturedBooks();
+  </script>
+</body>
+</html>

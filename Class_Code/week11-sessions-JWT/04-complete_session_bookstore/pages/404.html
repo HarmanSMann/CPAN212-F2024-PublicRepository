@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - Bookstore</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fef7e9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #b24c4e;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #5a5a5a;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #b24c4e;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #8e393b;
+    }
+
+    .shelf {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .book {
+      width: 50px;
+      height: 70px;
+      background-color: #d8b99c;
+      border: 1px solid #9c7c6a;
+      transform: rotate(-5deg);
+    }
+
+    .book:nth-child(2) {
+      transform: rotate(3deg);
+      background-color: #f0d5b7;
+    }
+
+    .book:nth-child(3) {
+      transform: rotate(-2deg);
+      background-color: #d5e1df;
+    }
+  </style>
+</head>
+<body>
+  <h1>Oops! Page Not Found</h1>
+  <p>It seems the page you're looking for has been misplaced on the bookshelf.</p>
+  <a href="/">Return to Home</a>
+
+  <div class="shelf">
+    <div class="book"></div>
+    <div class="book"></div>
+    <div class="book"></div>
+  </div>
+</body>
+</html>

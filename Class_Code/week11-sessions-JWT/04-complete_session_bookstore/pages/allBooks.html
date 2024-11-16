@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Books</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Georgia", serif;
+        background-color: #f4f1ea;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensures the body takes the full height of the viewport */
+      }
+      header {
+        background-color: #c49d68;
+        color: #f4f1ea;
+        padding: 20px;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        color: #f4f1ea;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
+      header nav a:hover {
+        text-decoration: underline;
+      }
+      main {
+        padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-grow: 1; /* Ensures the main content area grows and takes up the remaining space */
+      }
+      h2 {
+        color: #6b4a30;
+        font-size: 2rem;
+        border-bottom: 2px solid #6b4a30;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+      .book-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .book-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+      }
+      .book-card h3 {
+        font-size: 1.5rem;
+        color: #6b4a30;
+        margin: 10px 0;
+      }
+      .book-card p {
+        margin: 10px 0;
+        font-size: 1rem;
+      }
+      .book-card a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #c49d68;
+        color: #f4f1ea;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+      .book-card a:hover {
+        background-color: #6b4a30;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #c49d68;
+        color: #f4f1ea;
+        /* Ensures footer stays at the bottom */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>All Books</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/books/all">View All Books</a>
+        <a href="/books/add">Add a New Book</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Browse Our Collection</h2>
+      <div id="bookList" class="book-list"></div>
+    </main>
+
+    <footer>&copy; 2024 Bookstore. Crafted with care for book lovers.</footer>
+
+    <script>
+      async function loadAllBooks() {
+        try {
+          const response = await fetch("/api/books/all");
+          const books = await response.json();
+
+          const bookListContainer = document.getElementById("bookList");
+          bookListContainer.innerHTML = ""; // Clear previous content
+
+          if (books.length === 0) {
+            bookListContainer.innerHTML =
+              "<p>No books available at the moment.</p>";
+            return;
+          }
+
+          books.forEach((book) => {
+            const bookCard = document.createElement("div");
+            bookCard.className = "book-card";
+            bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Price:</strong> $${book.price.toFixed(2)}</p>
+            <a href="/books/${book._id}">View Details</a>
+          `;
+            bookListContainer.appendChild(bookCard);
+          });
+        } catch (error) {
+          console.error("Error loading books:", error);
+          document.getElementById("bookList").innerHTML =
+            "<p>Error loading books. Please try again later.</p>";
+        }
+      }
+
+      loadAllBooks();
+    </script>
+  </body>
+</html>

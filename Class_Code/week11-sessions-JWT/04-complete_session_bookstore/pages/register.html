@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* Reset margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic layout settings */
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f4f1ea;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #c49d68;
+      color: #f4f1ea;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    header nav {
+      margin-top: 10px;
+    }
+
+    header nav a {
+      color: #f4f1ea;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+      flex-grow: 1; /* Allow main content to take available space */
+    }
+
+    h2 {
+      color: #6b4a30;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #6b4a30;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Register</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Create an Account</h2>
+    <form id="registerForm" action="/api/users/register" method="POST">
+      <input type="text" name="first_name" placeholder="First Name" required />
+      <input type="text" name="last_name" placeholder="Last Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Error message display if registration fails -->
+    <div id="errorMessage" class="error-message"></div>
+  </main>
+
+  <footer>
+    &copy; 2024 Bookstore. Crafted with care for book lovers.
+  </footer>
+
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    const errorMessage = document.getElementById('errorMessage');
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(registerForm);
+      const data = Object.fromEntries(formData);
+
+      try {
+        const response = await fetch('/api/users/register', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Redirect to login page after successful registration
+          window.location.href = '/login';
+        } else {
+          // Display error message if registration fails
+          errorMessage.textContent = result.message || 'Error during registration';
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        errorMessage.textContent = 'Something went wrong. Please try again later.';
+      }
+    });
+  </script>
+</body>
+</html>

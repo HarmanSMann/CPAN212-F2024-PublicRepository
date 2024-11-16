@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Details</title>
+  <style>
+    /* Reset margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic layout settings */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Georgia', serif;
+      background-color: #f4f1ea;
+      color: #333;
+    }
+
+    header {
+      background-color: #c49d68;
+      color: #f4f1ea;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    header nav {
+      margin-top: 10px;
+    }
+
+    header nav a {
+      color: #f4f1ea;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 30px;
+      max-width: 600px;
+      margin: 30px auto 0 auto; /* Added margin-top for spacing */
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      /* Make sure content only expands to its content size */
+      min-height: 300px; /* Optional: Set a minimum height for main */
+    }
+
+    h2 {
+      color: #6b4a30;
+      font-size: 2rem;
+      border-bottom: 2px solid #6b4a30;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .book-details p {
+      margin: 10px 0;
+    }
+
+    .book-details .label {
+      font-weight: bold;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .back-btn:hover {
+      background-color: #6b4a30;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #c49d68;
+      color: #f4f1ea;
+      margin-top: 30px;
+      /* Ensure footer stays at the bottom */
+      margin-top: auto; /* Push footer to the bottom */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Book Details</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/books/all">View All Books</a>
+      <a href="/books/add">Add a New Book</a>
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Book Information</h2>
+    <div class="book-details">
+      <p><span class="label">Title:</span> <span class="value" id="bookTitle">Loading...</span></p>
+      <p><span class="label">Author:</span> <span class="value" id="bookAuthor">Loading...</span></p>
+      <p><span class="label">Publisher:</span> <span class="value" id="bookPublisher">Loading...</span></p>
+      <p><span class="label">Genres:</span> <span class="value" id="bookGenres">Loading...</span></p>
+      <p><span class="label">Price:</span> <span class="value" id="bookPrice">Loading...</span></p>
+      <p><span class="label">Pages:</span> <span class="value" id="bookPages">Loading...</span></p>
+    </div>
+
+    <a href="/books/all" class="back-btn">Back to All Books</a>
+  </main>
+
+  <footer>
+    &copy; 2024 Bookstore. Crafted with care for book lovers.
+  </footer>
+
+  <script>
+    // Extract the bookId from the URL path
+    const pathParts = window.location.pathname.split('/');
+    const bookId = pathParts[pathParts.length - 1]; // The last part is the bookId
+
+    // Fetch book details from the API
+    async function fetchBookDetails() {
+      try {
+        const response = await fetch(`/api/books/details/${bookId}`);
+        const book = await response.json();
+        console.log(book)
+
+        if (book) {
+          // Populate the book details
+          document.getElementById('bookTitle').textContent = book.title;
+          document.getElementById('bookAuthor').textContent = book.author;
+          document.getElementById('bookPublisher').textContent = book.publishers;
+          document.getElementById('bookGenres').textContent = book.genres;
+          document.getElementById('bookPrice').textContent = `$${book.price.toFixed(2)}`;
+          document.getElementById('bookPages').textContent = book.pages;
+        } else {
+          document.querySelector('.book-details').innerHTML = '<p>Book not found</p>';
+        }
+      } catch (error) {
+        console.error('Error loading book details:', error);
+        document.querySelector('.book-details').innerHTML = '<p>Error loading book details.</p>';
+      }
+    }
+
+    fetchBookDetails();
+  </script>
+</body>
+</html>
