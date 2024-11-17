@@ -1,7 +1,4 @@
-// controllers/userController.js
-const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-const { generateToken } = require('../middlewares/auth');
 
 // Register user
 const registerUser = async (req, res) => {
@@ -25,11 +22,9 @@ const registerUser = async (req, res) => {
     });
 
     await newUser.save();
-    const token = generateToken(newUser);
 
     res.status(201).json({
       message: 'User registered successfully',
-      token,
     });
   } catch (error) {
     console.error('Error during registration:', error);
@@ -41,7 +36,6 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body)
 
     // Check if the user exists
     const user = await User.findOne({ email });
@@ -55,12 +49,16 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Generate JWT token
-    const token = generateToken(user);
+    // Store user info in session
+    req.session.user = {
+      userId: user._id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+    };
 
     res.status(200).json({
       message: 'Login successful',
-      token,
     });
   } catch (error) {
     console.error('Error during login:', error);
@@ -68,15 +66,24 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Logout user (clear the token in the front-end, if needed)
+// Logout user
 const logoutUser = (req, res) => {
-  res.status(200).json({ message: 'Logout successful' });
+  // Destroy the session on logout
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error logging out' });
+    }
+    res.status(200).json({ message: 'Logout successful' });
+  });
 };
 
-// Check session (verify token in header or cookie)
+// Check session (get user data from session)
 const checkSession = (req, res) => {
-  if (req.user) {
-    res.status(200).json({ userId: req.user.userId, first_name: req.user.first_name });
+  if (req.session.user) {
+    res.status(200).json({
+      userId: req.session.user.userId,
+      first_name: req.session.user.first_name,
+    });
   } else {
     res.status(401).json({ message: 'No user session found' });
   }
