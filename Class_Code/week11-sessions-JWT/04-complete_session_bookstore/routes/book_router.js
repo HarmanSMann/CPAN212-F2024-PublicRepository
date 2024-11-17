@@ -4,7 +4,7 @@ const bookController = require("../controllers/book_controller");
 const router = express.Router();
 
 // Fetch books by the logged-in user (JSON response)
-router.get("/", bookController.getBooksByUser);
+router.get("/", bookController.getUserBooks);
 
 // Fetch all books (JSON response)
 router.get("/all", bookController.getAllBooks);

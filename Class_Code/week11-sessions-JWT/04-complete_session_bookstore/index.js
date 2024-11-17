@@ -7,11 +7,10 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 dotenv.config();
-//hello
 
 // Import routers
-const bookRouter = require("../routes/book_router");
-const userRouter = require("../routes/user_router");
+const bookRouter = require("./routes/book_router");
+const userRouter = require("./routes/user_router");
 
 
 // Initialize app
