@@ -12,8 +12,7 @@ dotenv.config();
 // Import routers
 const bookRouter = require("./routes/book_router");
 const userRouter = require("./routes/user_router");
-app.use(express.static(path.join(__dirname, 'pages')));
-
+app.use(express.static(path.join(__dirname, "pages")));
 
 // Initialize app
 const app = express();
@@ -43,38 +42,38 @@ app.use("/api/books", bookRouter);
 app.use("/api/users", userRouter);
 
 // Static HTML routes
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/index.html"));
 });
 
-app.get('/books/all', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/allBooks.html'));
+app.get("/books/all", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/allBooks.html"));
 });
 
-app.get('/books/add', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/addBook.html'));
+app.get("/books/add", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/addBook.html"));
 });
 
-app.get('/books/edit/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/editBook.html'));
+app.get("/books/edit/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/editBook.html"));
 });
 
-app.get('/books/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/bookDetail.html'));
+app.get("/books/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/bookDetail.html"));
 });
 
 // Register and Login pages
-app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/register.html'));
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/register.html"));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/login.html'));
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/login.html"));
 });
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'pages/404.html'));
+  res.status(404).sendFile(path.join(__dirname, "pages/404.html"));
 });
 
 // Database connection
@@ -82,9 +81,10 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`)
-    );
   })
   .catch((error) => console.error("MongoDB connection error:", error));
-
+  
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
+module.exports = app;
