@@ -5,6 +5,7 @@ const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
+const serverless = require("serverless-http");
 
 dotenv.config();
 
@@ -85,4 +86,4 @@ mongoose
   })
   .catch((error) => console.error("MongoDB connection error:", error));
 
-  module.exports = app;
+  module.exports.handler = serverless(app);
