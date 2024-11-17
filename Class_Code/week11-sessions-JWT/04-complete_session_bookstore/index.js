@@ -12,6 +12,8 @@ dotenv.config();
 // Import routers
 const bookRouter = require("./routes/book_router");
 const userRouter = require("./routes/user_router");
+app.use(express.static(path.join(__dirname, 'pages')));
+
 
 // Initialize app
 const app = express();
@@ -86,4 +88,3 @@ mongoose
   })
   .catch((error) => console.error("MongoDB connection error:", error));
 
-  module.exports.handler = serverless(app);
