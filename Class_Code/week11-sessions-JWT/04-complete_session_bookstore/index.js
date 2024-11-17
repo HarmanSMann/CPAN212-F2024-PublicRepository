@@ -76,12 +76,26 @@ app.use((req, res) => {
 });
 
 // Database connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => console.error("MongoDB connection error:", error));
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(() => {
+//     console.log("Connected to MongoDB");
+//   })
+//   .catch((error) => console.error("MongoDB connection error:", error));
+mongoose.connect(process.env.MONGO_URI);
+
+const db = mongoose.connection;
+
+db.once("open", () => {
+  // Check connection
+  console.log("Connected to MongoDB");
+});
+ 
+ 
+db.on("error", (err) => {
+  // Check for DB errors
+  console.log("DB Error");
+});
 
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
