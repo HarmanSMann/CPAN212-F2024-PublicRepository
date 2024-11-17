@@ -1,24 +1,25 @@
-const PORT = process.env.PORT || 8000;
 const express = require("express");
+const path = require("path");
 const app = express();
 
-// middlelware
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
 
-// routes
+// Route to handle dynamic pages if needed
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
-});
-
-app.use("", (req, res) => {
+app.use((req, res) => {
   res.status(404).send("Page not found");
 });
+
+module.exports.handler = require("serverless-http")(app);
+
 
 
 
