@@ -8,6 +8,8 @@ app.use(express.json());
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
+console.log(__dirname)
+console.log(path.join(__dirname, "public", "index.html"))
 
 // Route to handle dynamic pages if needed
 app.get("/", (req, res) => {
