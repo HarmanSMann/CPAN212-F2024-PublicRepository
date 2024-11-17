@@ -1,3 +1,27 @@
+const PORT = process.env.PORT || 8000;
+const express = require("express");
+const app = express();
+
+// middlelware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "pages")));
+
+// routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
+});
+
+app.use("", (req, res) => {
+  res.status(404).send("Page not found");
+});
+
+
+
 // const express = require("express");
 // const mongoose = require("mongoose");
 // const session = require("express-session");
@@ -11,7 +35,7 @@
 // // Import routers
 // const bookRouter = require("./routes/book_router");
 // const userRouter = require("./routes/user_router");
-// app.use(express.static(path.join(__dirname, "pages")));
+// 
 
 // // Initialize app
 // const app = express();
@@ -44,9 +68,7 @@
 // app.get("/", (req, res) => {
 //   res.send("Hi there");
 // });
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "pages/index.html"));
-// });
+
 
 // app.get("/books/all", (req, res) => {
 //   res.sendFile(path.join(__dirname, "pages/allBooks.html"));
@@ -97,24 +119,3 @@
 //   console.log(`Server running on http://localhost:${PORT}`)
 // );
 // module.exports = app;
-
-const PORT = process.env.PORT || 8000;
-const express = require("express");
-const app = express();
-
-// middlelware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// routes
-app.get("/", (req, res) => {
-  res.send("Welcome to our server");
-});
-
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
-});
-
-app.use("", (req, res) => {
-  res.status(404).send("Page not found");
-});
