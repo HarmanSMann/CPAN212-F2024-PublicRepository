@@ -19,7 +19,7 @@ const BookDetail = () => {
 
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/details/${id}`);
+        const response = await fetch(`${import.meta.env.SERVER_URL}/api/books/details/${id}`);
         const data = await response.json();
         setBook(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const BookDetail = () => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.SERVER_URL}/api/books/delete/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
