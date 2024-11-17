@@ -7,18 +7,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "pages")));
+app.use(express.static(path.join(__dirname, "public")));
+
 
 // Route to handle dynamic pages if needed
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "pages", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.use((req, res) => {
   res.status(404).send("Page not found");
 });
 
-module.exports.handler = require("serverless-http")(app);
 
 
 
