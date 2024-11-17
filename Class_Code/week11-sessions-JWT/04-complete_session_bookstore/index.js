@@ -42,6 +42,9 @@ app.use("/api/users", userRouter);
 
 // Static HTML routes
 app.get("/", (req, res) => {
+  res.send("Hi there");
+});
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "pages/index.html"));
 });
 
@@ -76,12 +79,6 @@ app.use((req, res) => {
 });
 
 // Database connection
-// mongoose
-//   .connect(process.env.MONGO_URI)
-//   .then(() => {
-//     console.log("Connected to MongoDB");
-//   })
-//   .catch((error) => console.error("MongoDB connection error:", error));
 mongoose.connect(process.env.MONGO_URI);
 
 const db = mongoose.connection;
