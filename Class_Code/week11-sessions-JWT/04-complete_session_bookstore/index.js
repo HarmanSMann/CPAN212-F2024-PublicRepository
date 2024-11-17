@@ -5,7 +5,6 @@ const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
-const serverless = require("serverless-http");
 
 dotenv.config();
 
@@ -83,7 +82,7 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((error) => console.error("MongoDB connection error:", error));
-  
+
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
