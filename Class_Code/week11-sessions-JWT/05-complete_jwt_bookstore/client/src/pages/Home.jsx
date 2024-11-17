@@ -46,9 +46,7 @@ const Homepage = () => {
               <h3 style={styles.bookTitle}>{book.title}</h3>
               <p><strong>Author:</strong> {book.author}</p>
               <p><strong>Price:</strong> ${book.price.toFixed(2)}</p>
-              <a href={`/books/${book._id}`} style={styles.detailsLink}>
-                View Details
-              </a>
+              <Link to={`/books/${book._id}`}>View Details</Link>
             </div>
           ))
         ) : (
