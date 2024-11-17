@@ -5,7 +5,7 @@ const app = express();
 // middlelware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "pages")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // routes
 app.get("/", (req, res) => {
