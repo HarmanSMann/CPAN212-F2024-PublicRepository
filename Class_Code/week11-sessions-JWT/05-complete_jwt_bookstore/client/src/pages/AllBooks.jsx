@@ -7,7 +7,7 @@ const AllBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/books/all");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/all`);
         const data = await response.json();
         setBooks(data);
       } catch (error) {
