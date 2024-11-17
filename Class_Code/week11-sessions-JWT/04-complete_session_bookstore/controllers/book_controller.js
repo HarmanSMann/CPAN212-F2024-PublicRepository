@@ -14,7 +14,7 @@ const getAllBooks = async (req, res) => {
 // Fetch all books for the logged-in user
 const getUserBooks = async (req, res) => {
   try {
-    const books = await Book.find({ created_by_user: req.user.userId });
+    const books = await Book.find({ created_by_user: req.session.user.userId });
     res.json(books);
   } catch (error) {
     res.status(500).json({ message: "Error fetching books", error });
@@ -33,7 +33,7 @@ const addBook = async (req, res) => {
       genres,
       price,
       pages,
-      created_by_user: req.user.userId, // Save the user who created the book
+      created_by_user: req.session.user.userId, // Save the user who created the book
     });
 
     await newBook.save();
