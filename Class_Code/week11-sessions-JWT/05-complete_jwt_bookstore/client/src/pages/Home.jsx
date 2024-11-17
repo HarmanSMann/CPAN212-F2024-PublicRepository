@@ -11,7 +11,7 @@ const Homepage = () => {
         const token = localStorage.getItem("authToken");
 
         // If token exists, include it in the Authorization header
-        const response = await fetch(`https://cpan-212-f2024-public-repository.vercel.app/api/books`, {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/books`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

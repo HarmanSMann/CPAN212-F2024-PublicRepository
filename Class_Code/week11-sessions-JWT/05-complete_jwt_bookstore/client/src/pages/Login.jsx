@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/login`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

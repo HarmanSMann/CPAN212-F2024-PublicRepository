@@ -19,7 +19,7 @@ const EditBook = () => {
     const fetchBookDetails = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_SERVER_URL}/api/books/details/${id}`
+          `${import.meta.env.VITE_SERVER_URL}api/books/details/${id}`
         );
         const data = await response.json();
         setBook(data);
@@ -49,7 +49,7 @@ const EditBook = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/books/edit/${id}`,
+        `${import.meta.env.VITE_SERVER_URL}api/books/edit/${id}`,
         {
           method: "PUT",
           headers: {
