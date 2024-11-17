@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
+  console.log(import.meta.env.VITE_SERVER_URL)
 
   useEffect(() => {
     const fetchBooks = async () => {
