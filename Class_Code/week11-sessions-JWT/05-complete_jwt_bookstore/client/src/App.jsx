@@ -22,8 +22,8 @@ const App = () => {
             <Route path="/books/add" element={<AddBook />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/books/:id" element={<BookDetail />} /> {/* Book details route */}
-            <Route path="/books/edit/:id" element={<EditBook />} /> {/* Edit book route */}
+            <Route path="/books/:id" element={<BookDetail />} />
+            <Route path="/books/edit/:id" element={<EditBook />} />
           </Routes>
         </main>
         <Footer />
@@ -31,5 +31,6 @@ const App = () => {
     </Router>
   );
 };
+
 
 export default App;

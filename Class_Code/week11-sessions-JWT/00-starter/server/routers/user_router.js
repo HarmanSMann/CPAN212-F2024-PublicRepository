@@ -43,14 +43,14 @@ router.post("/login", (req, res) => {
   User.findOne({ email: email })
     .then((user_account) => {
       if (!user_account) {
-        return res.status(400).json({ error: "Invalid credentials" });
+        return res.status(400).json({ error: "User not found" });
       }
 
       bcrypt
         .compare(password, user_account.password)
         .then((isMatch) => {
           if (!isMatch) {
-            return res.status(400).json({ error: "Invalid credentials" });
+            return res.status(400).json({ error: "Invalid password under this account" });
           }
 
           return res.status(200).json({ message: "Login Successful" });

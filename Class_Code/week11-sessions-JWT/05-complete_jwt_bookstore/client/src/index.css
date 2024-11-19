@@ -16,8 +16,14 @@ body {
   justify-content: baseline;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
-  flex-grow: 1; /* Takes up available space */
+  flex-grow: 1; /* Expands to fill available space */
 }
 
 /* Heading 2 styles */
@@ -59,7 +65,6 @@ nav a:hover {
   color: #fff;
   text-align: center;
   line-height: 3rem; /* Centers text vertically */
-  position: relative;
 }
 
 
